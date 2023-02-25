@@ -29,6 +29,15 @@ if in.OptionalField != nil && *in.OptionalField == "value" {
 }
 ```
 
+Sometimes even unsafe:
+
+```go
+value := "v1"
+in.OptionalField = &value
+value = "v2" // ups... in.OptionalField is changed too! 
+```
+
+
 ## This tiny packages simplifies the use of optional values
 
 One-line initialization:
@@ -53,4 +62,22 @@ if ptr.Value(in.OptionalField) == "value" {
 
 ```go
 v := ptr.ValueOrDefault(in.OptionalField, "defaultValue")
+```
+
+Safe code:
+
+```go
+value := "v1"
+in.OptionalField = ptr.To(value)
+value = "v2" // in.OptionalField is not changed
+```
+
+```go
+copyOfPointer := ptr.Copy(in.OptionalField)
+```
+
+## Installation
+
+```shell
+go get github.com/elgopher/ptr@latest
 ```
