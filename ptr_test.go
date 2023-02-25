@@ -13,11 +13,18 @@ import (
 )
 
 func TestTo(t *testing.T) {
-	t.Run("should return pointer", func(t *testing.T) {
+	t.Run("should return pointer to value", func(t *testing.T) {
 		value := "value"
 		pointer := ptr.To(value)
 		require.NotNil(t, pointer)
 		assert.Equal(t, value, *pointer)
+	})
+
+	t.Run("pointer should point to copy of the value", func(t *testing.T) {
+		value := "before"
+		pointer := ptr.To(value)
+		value = "after"
+		assert.Equal(t, "before", *pointer)
 	})
 }
 
@@ -25,9 +32,7 @@ func TestValue(t *testing.T) {
 	t.Run("should return pointer value", func(t *testing.T) {
 		expected := "value"
 		pointer := ptr.To(expected)
-		// when
 		actual := ptr.Value(pointer)
-		// then
 		assert.Equal(t, expected, actual)
 	})
 
@@ -44,9 +49,7 @@ func TestValueOrDefault(t *testing.T) {
 	t.Run("should return pointer value", func(t *testing.T) {
 		expected := "value"
 		pointer := ptr.To(expected)
-		// when
 		actual := ptr.ValueOrDefault(pointer, defaultValue)
-		// then
 		assert.Equal(t, expected, actual)
 	})
 
@@ -64,17 +67,24 @@ func TestCopy(t *testing.T) {
 		assert.Nil(t, theCopy)
 	})
 
-	t.Run("should return copy of pointer", func(t *testing.T) {
+	t.Run("should return new pointer", func(t *testing.T) {
 		original := ptr.To("str")
 		theCopy := ptr.Copy(original)
 		assert.Equal(t, *original, *theCopy)
 		assert.NotSame(t, original, theCopy)
 	})
 
-	t.Run("should return copy to struct pointer", func(t *testing.T) {
+	t.Run("should return new pointer to struct", func(t *testing.T) {
 		original := &struct{ field string }{field: "value"}
 		theCopy := ptr.Copy(original)
 		assert.Equal(t, *original, *theCopy)
 		assert.NotSame(t, original, theCopy)
+	})
+
+	t.Run("pointer should point to copy of the value", func(t *testing.T) {
+		original := "original"
+		theCopy := ptr.Copy(&original)
+		original = "altered"
+		assert.Equal(t, "original", *theCopy)
 	})
 }
