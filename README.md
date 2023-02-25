@@ -64,6 +64,8 @@ if ptr.Value(in.OptionalField) == "value" {
 }
 ```
 
+or get value by specifying the default value when in.OptionalField is nil:
+
 ```go
 v := ptr.ValueOrDefault(in.OptionalField, "defaultValue")
 ```
