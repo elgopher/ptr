@@ -75,8 +75,10 @@ in.OptionalField = ptr.To(value)
 value = "v2" // in.OptionalField is not changed
 ```
 
+or
+
 ```go
-copyOfPointer := ptr.Copy(in.OptionalField)
+newPointer := ptr.Copy(in.OptionalField)
 ```
 
 ## Installation
