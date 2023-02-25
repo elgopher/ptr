@@ -1,0 +1,46 @@
+// (c) 2023 Jacek Olszak
+// This code is licensed under MIT license (see LICENSE for details)
+
+package ptr
+
+// To returns a pointer to value. This function is very useful for
+// single-line expressions, where "&" cannot be used:
+//
+//	 in := Input{
+//		  RequiredField: "works"
+//		  OptionalField: ptr.To("this also works")
+//	}
+func To[T any](t T) *T {
+	return &t
+}
+
+// Value returns a value behind the pointer or zero value when value is nil.
+func Value[T any](ptr *T) T {
+	if ptr != nil {
+		return *ptr
+	}
+
+	var zeroValue T
+
+	return zeroValue
+}
+
+// ValueOrDefault returns a value behind the pointer or defaultValue when value is nil.
+func ValueOrDefault[T any](ptr *T, defaultValue T) T {
+	if ptr != nil {
+		return *ptr
+	}
+
+	return defaultValue
+}
+
+// Copy copies value behind the pointer and returns a new pointer to the copy.
+func Copy[T any](in *T) *T {
+	var out *T
+
+	if in != nil {
+		out = To(*in)
+	}
+
+	return out
+}
