@@ -1,6 +1,7 @@
 // (c) 2023 Jacek Olszak
 // This code is licensed under MIT license (see LICENSE for details)
 
+// Package ptr provides generic functions to get optional values.
 package ptr
 
 // To returns a pointer to value.
