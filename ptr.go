@@ -3,13 +3,21 @@
 
 package ptr
 
-// To returns a pointer to value. This function is very useful for
-// single-line expressions, where "&" cannot be used:
+// To returns a pointer to value.
 //
-//	 in := Input{
-//		  RequiredField: "works"
-//		  OptionalField: ptr.To("this also works")
+// This function is very useful for single-line expressions, where "&" cannot be used:
+//
+//	in := struct {
+//		OptionalField *string
+//	}{
+//		OptionalField: ptr.To("works fine"),
 //	}
+//
+// To always create a pointer to copy of the value:
+//
+//	value := "v1"
+//	in.OptionalField = ptr.To(value)
+//	value = "v2" // in.OptionalField is not changed
 func To[T any](t T) *T {
 	return &t
 }
