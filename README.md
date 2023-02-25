@@ -1,6 +1,8 @@
 # ptr
 Generic functions to get optional values
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/elgopher/ptr.svg)](https://pkg.go.dev/github.com/elgopher/ptr)
+
 ## Problems with Go optional values
 
 By convention, optional values in Go are pointers:
