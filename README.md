@@ -20,8 +20,8 @@ But such structs **cannot** be initialized in a single expression:
 
 ```go
 in := Input{
-	RequiredField: "works"
-	OptionalField: &("does not work")
+	RequiredField: "works",
+	OptionalField: &("does not work"),
 }
 ```
 
@@ -50,8 +50,8 @@ One-line initialization:
 import "github.com/elgopher/ptr"
 
 in := Input{
-	RequiredField: "works"
-	OptionalField: ptr.To("this also works")
+	RequiredField: "works",
+	OptionalField: ptr.To("this also works"),
 }
 ```
 
